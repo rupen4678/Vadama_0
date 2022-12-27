@@ -1,0 +1,85 @@
+{%load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.0.2 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
+  <script src="https://unpkg.com/ityped@0.0.10"></script>
+    <style>
+       
+</style>  
+  </head>
+  <body>
+    <form class="login-form">
+    <h1><span class='ityped'></span></h1>
+      <div class="textb">
+        {{ form.username }}
+        <div class="placeholder">Username</div>
+    </div>
+
+    <div class="textb">
+        {{ form.password1 }}
+        <div class="placeholder">Password</div>
+      <div class="show-password fas fa-eye-slash"></div>
+    </div>
+
+    <div class="textb">
+        {{ form.password2 }}
+        <div class="placeholder">Password</div>
+        <div class="ass fas fa-eye-slash"></div>
+      </div>
+    <button class='btn fas fa-arrow-right' disabled></button>
+    <a href="{% url 'home:login' %}">Sign In Here</a>
+    <script>
+        var fields = document.querySelectorAll(".textb input");
+    var btn = document.querySelector(".btn");
+
+    function check(){
+      if(fields[0].value != "" && fields[1].value != "" && fields[2].value != '')
+        btn.disabled = false;
+      else
+        btn.disabled = true;  
+    }
+
+    fields[0].addEventListener("keyup",check);
+    fields[1].addEventListener("keyup",check);
+    fields[2].addEventListener("keyup",check);
+    
+    document.querySelector(".show-password").addEventListener("click",function(){
+      if(this.classList[2] == "fa-eye-slash"){
+        this.classList.remove("fa-eye-slash");
+        this.classList.add("fa-eye");
+        fields[1].type = "text";
+      }else{
+        this.classList.remove("fa-eye");
+        this.classList.add("fa-eye-slash");
+        fields[1].type = "password";
+      }
+    });
+    document.querySelector(".ass").addEventListener("click",function(){
+      if(this.classList[2] == "fa-eye-slash"){
+        this.classList.remove("fa-eye-slash");
+        this.classList.add("fa-eye");
+        fields[2].type = "text";
+      }else{
+        this.classList.remove("fa-eye");
+        this.classList.add("fa-eye-slash");
+        fields[2].type = "password";
+      }
+    });
+    window.ityped.init(document.querySelector('.ityped'),{
+      strings: ['welcome to hotler !!', 'Register for access', 'free and easy.'],
+      loop: true,
+      backward: true,
+      backspeed: 50,
+
+    })
+    </script>
+    <!-- write some scripts here -->
+  </body>
+</html>

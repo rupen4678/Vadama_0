@@ -1,0 +1,165 @@
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_javascript %}
+{% bootstrap_css %}
+{% bootstrap_messages %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>VadamaHome</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
+    <link rel="stylesheet" href="{% static 'fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product/Article-Clean.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product/Article-List.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product/Features-Boxed.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product/Features-Clean.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product/Footer-Basic.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product/Navigation-with-Search.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product/Navigation-with-Button.css' %}">
+    <link rel="stylesheet" href="{% static 'css/product/styles.css' %}">
+    <script rel="javascript" src="{% static 'js/index.js' %}"></script>
+</head>
+
+<body style="padding: 0px;">
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+        <div class="container"><a class="navbar-brand" href="#">Vadama v0.5</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">First Item</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Second Item</a></li>
+                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">Dropdown </a>
+                        <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                </ul><span class="navbar-text actions"> <a class="login" href="{% url 'home:logout' %}">Logout</a></span>
+                    {% else %}
+                        </ul><span class="navbar-text actions"> <a class="login" href="{% url 'home:login' %}">Log In</a><a class="btn btn-light action-button" role="button" href="{% url 'home:register' %}">Sign Up</a></span>
+                    {% endif %}
+            </div>
+        </div>
+    </nav>
+    <div class='container'>
+    <div class="row">
+    {% for m in data %}
+      <div class="col-lg-3 col-sm-6 col-xs-12 h-25 w-30">
+        <div class="card" >
+          <img src=" {{ m.image.url }}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{ m.name }}</h5>
+            <p class="card-text">{{ m.description|safe|truncatechars:15 }}</p>
+            <a href="{% url 'home:pdetail' m.id %}" class="btn btn-primary">See details</a>
+            <a type='button' data-bs-toggle='modal' class="btn btn-primary" data-bs-toggle='modal' data-bs-target="#exampleModal">delete</a>
+            
+            <!-- delete pop up -->
+
+            </div>
+            </div>
+        </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            ...
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <a href="{% url 'home:ddetail' m.id %}" class="btn btn-primary" type='button' data-bs-dismiss="modal">delete</a>
+            {% bootstrap_alert "item deleted" alert_type='success' %}
+        </div>
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+
+    <!-- this code is for the websocket project -->
+    
+<div class="input-group">
+    <span type='button' id="clickme" class="btn btn-primary">With textarea</span>
+    <textarea id="l1" class="form-control" aria-label="With textarea"></textarea>
+  </div>
+    <p id="l2">some:-</p>
+
+    </div>
+  </div>
+    <br>
+    <section class="article-list">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Latest Articles</h2>
+                <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae. </p>
+            </div>
+            <div class="row articles">
+                <div class="col-sm-6 col-md-4 item"><a href="#"><img class="img-fluid" src="{% static 'img/desk.jpg' %}"></a>
+                    <h3 class="name">Article Title</h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.</p><a class="action" href="#"><i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+                <div class="col-sm-6 col-md-4 item"><a href="#"><img class="img-fluid" src="{% static 'img/building.jpg'%}"></a>
+                    <h3 class="name">Article Title</h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.</p><a class="action" href="#"><i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4 offset-lg-0 item"><a href="#"><img class="img-fluid" src="{% static 'img/loft.jpg' %}"></a>
+                    <h3 class="name">Article Title</h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.</p><a class="action" href="#"><i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="features-clean">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Features</h2>
+                <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae. </p>
+            </div>
+            <div class="row features">
+                <div class="col-sm-6 col-lg-4 item"><i class="fa fa-map-marker icon"></i>
+                    <h3 class="name">Works everywhere</h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est.</p>
+                </div>
+                <div class="col-sm-6 col-lg-4 item"><i class="fa fa-clock-o icon"></i>
+                    <h3 class="name">Always available</h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est.</p>
+                </div>
+                <div class="col-sm-6 col-lg-4 item"><i class="fa fa-list-alt icon"></i>
+                    <h3 class="name">Customizable</h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est.</p>
+                </div>
+                <div class="col-sm-6 col-lg-4 item"><i class="fa fa-leaf icon"></i>
+                    <h3 class="name">Organic</h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est.</p>
+                </div>
+                <div class="col-sm-6 col-lg-4 item"><i class="fa fa-plane icon"></i>
+                    <h3 class="name">Fast</h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est.</p>
+                </div>
+                <div class="col-sm-6 col-lg-4 item"><i class="fa fa-phone icon"></i>
+                    <h3 class="name">Mobile-first</h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="footer-basic">
+            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Home</a></li>
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright">Vadama © 2022</p>
+        </footer>
+    </section>
+
+   
+</body>
+
+</html>

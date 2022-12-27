@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+<style>
+body{
+    margin-top:20px;
+    margin: 20px!important;
+    background:#ebeef0;
+}
+.img-sm {
+    width: 46px;
+    height: 46px;
+    radius: 50px;
+}
+.img-circle{
+  radius: 50%;
+
+}
+.panel {
+    box-shadow: 0 2px 0 rgba(0,0,0,0.075);
+    border-radius: 0;
+    border: 0;
+    margin-bottom: 15px;
+}
+
+.panel .panel-footer, .panel>:last-child {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.panel .panel-heading, .panel>:first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.panel-body {
+    padding: 25px 20px;
+}
+
+
+.media-block .media-left {
+    display: block;
+    float: left
+}
+
+.media-block .media-right {
+    float: right
+}
+
+.media-block .media-body {
+    display: block;
+    overflow: hidden;
+    width: auto
+}
+
+.middle .media-left,
+.middle .media-right,
+.middle .media-body {
+    vertical-align: middle
+}
+
+.thumbnail {
+    border-radius: 0;
+    border-color: #e9e9e9
+}
+
+.tag.tag-sm, .btn-group-sm>.tag {
+    padding: 5px 10px;
+}
+
+.tag:not(.label) {
+    background-color: #fff;
+    padding: 6px 12px;
+    border-radius: 2px;
+    border: 1px solid #cdd6e1;
+    font-size: 12px;
+    line-height: 1.42857;
+    vertical-align: middle;
+    -webkit-transition: all .15s;
+    transition: all .15s;
+}
+.text-muted, a.text-muted:hover, a.text-muted:focus {
+    color: #acacac;
+}
+.text-sm {
+    font-size: 0.9em;
+}
+.text-5x, .text-4x, .text-5x, .text-2x, .text-lg, .text-sm, .text-xs {
+    line-height: 1.25;
+}
+
+.btn-trans {
+    background-color: transparent;
+    border-color: transparent;
+    color: #929292;
+}
+
+.btn-icon {
+    padding-left: 9px;
+    padding-right: 9px;
+}
+#nocomment{
+  font-size: 16px;
+  color: gray;
+  align: center;
+  text-align: center;
+}
+.btn-sm, .btn-group-sm>.bt
+</style>
+
+<div class="container">
+      <br>
+      <div class="card">
+        <img src=" {{ product.image.url }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <div class='row'>
+            <div class="col-xs-4 col-lg-4 col-sm-4"> 
+              <h5 class="card-title">{{ product.name }}</h5>
+            </div>
+            <div class="col-xs-4 col-lg-4 col-sm-4"> 
+              <p class="card-text">RS {{ product.price }}</p>
+            </div>
+          </div>
+          <p class="card-text">{{ product.description }}</p>
+        </div>
+      </div>
+  </div>
+
+<div class="container bootdey">
+<div class="col-md-12 bootstrap snippets">
+<div class="panel">
+  <!-- write a html form and subcomment send to django server -->
+
+<div class="row">
+  <div class="col-md-12">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              <h3 class="panel-title">Add a comment</h3>
+          </div>
+          <div class="panel-body">
+              <form>
+                  <div class="form-group">
+                      <label for="comment">Comment</label>
+                      <textarea class="form-control" id="commentss" rows="3"></textarea>
+                  </div>
+                  <button id="send" type="submit" class="btn btn-primary">Submit</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+<div id="emptyalert" class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Holy guacamole!</strong> The comment is empty i can't take it!!
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="row">
+  <div class="col-md-12">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              <h3 class="panel-title">Comments</h3>
+          </div>
+          <div class="panel-body" id="ccontainer comments-container">
+              <!-- comments will be added here -->
+              <p><strong>Comments</strong>
+          </div>
+      </div>
+  </div>
+</div>
+
+</div>
+
+{% if comments.count < 1 %}
+  <div id="nocomment">
+    <p> No comments yet</p>
+  </div>
+  <!-- below works -->
+{% elif 'code0' in comments %}
+  <p>No comments yet</p>
+{% endif %}
+</div>
+</div>
+<div id='datash'>
+  <p>something to show </p>
+</div>
+
+<script rel="javascript" src="{% static 'js/product.js' %}"></script>
+
+{% endblock %}
